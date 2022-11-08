@@ -224,6 +224,27 @@ app.delete("/review/:id", async (req, res) => {
     });
   }
 });
+
+// Get All reviews for single service
+app.get("/service/review/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const query = { service_id: id };
+
+    const reviews = await Reviews.find(query).toArray();
+
+    res.send({
+      success: true,
+      data: reviews,
+    });
+  } catch (error) {
+    res.send({
+      success: false,
+      error: error.message,
+    });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on Port ${PORT}`);
 });
