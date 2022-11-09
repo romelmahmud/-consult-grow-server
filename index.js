@@ -62,6 +62,26 @@ app.post("/service", async (req, res) => {
 });
 
 // Get All services
+app.get("/limitservice", async (req, res) => {
+  try {
+    const cursor = Services.find({}, { limit: 3 });
+    const services = await cursor.toArray();
+
+    res.send({
+      success: true,
+      message: "Successfully got the data",
+      data: services,
+    });
+  } catch (error) {
+    console.log(error.name, error.message);
+    res.send({
+      success: false,
+      error: error.message,
+    });
+  }
+});
+
+// Get All services
 app.get("/service", async (req, res) => {
   try {
     const cursor = Services.find({});
