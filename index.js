@@ -289,7 +289,7 @@ app.get("/service/review/:id", async (req, res) => {
 });
 
 // Get All reviews for single user
-app.get("/review/user/:id", async (req, res) => {
+app.get("/review/user/:id", verifyJWT, async (req, res) => {
   try {
     const { id } = req.params;
     const query = { userId: id };
