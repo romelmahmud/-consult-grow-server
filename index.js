@@ -251,7 +251,7 @@ app.get("/service/review/:id", async (req, res) => {
     const { id } = req.params;
     const query = { service_id: id };
 
-    const reviews = await Reviews.find(query).toArray();
+    const reviews = await Reviews.find(query).sort({ _id: -1 }).toArray();
 
     res.send({
       success: true,
@@ -269,7 +269,7 @@ app.get("/service/review/:id", async (req, res) => {
 app.get("/review/user/:id", async (req, res) => {
   try {
     const { id } = req.params;
-    const query = { author_id: id };
+    const query = { userId: id };
 
     const reviews = await Reviews.find(query).toArray();
 
